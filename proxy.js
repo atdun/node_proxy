@@ -320,7 +320,7 @@ function Proxy(socket) {
       } else {
         // 创建websocket
         const proxyWebSocket = new WebSocket(
-          "wss://websocket-proxy-ztjvjxlkwa.ap-northeast-1.fcapp.run"
+        // 替换成服务端地址
         );
         proxyWebSocket.on("open", () => {
           // 向服务端发送prepare连接信息
