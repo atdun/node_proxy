@@ -6,7 +6,17 @@ const net = require("net"),
   utils = require("./utils"),
   consts = require("./consts")(),
   config = require("./config")();
-
+const {sign} = require("jsonwebtoken");
+ fs = require('fs');
+ const wsToken = fs.readFileSync('./px.txt',  {encoding:'utf8'});
+const token = sign(
+  { data: 'your_payload_data' },  // 你的 payload
+  wsToken,                      // 私钥
+  {
+    algorithm: 'RS256',            // 使用 RS256 算法
+    expiresIn: '1h'                // 令牌有效期
+  }
+);
 function Proxy(socket) {
   return {
     /**
@@ -320,7 +330,7 @@ function Proxy(socket) {
       } else {
         // 创建websocket
         const proxyWebSocket = new WebSocket(
-        // 替换成服务端地址
+        //   替换自己的服务端地址
         );
         proxyWebSocket.on("open", () => {
           // 向服务端发送prepare连接信息
