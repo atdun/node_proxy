@@ -8,6 +8,7 @@ const net = require("net"),
   config = require("./config")();
 const {sign} = require("jsonwebtoken");
  fs = require('fs');
+ // 本地jwt私钥，用于生成token跟函数计算取鉴权，请自行替换成自己的私钥
  const wsToken = fs.readFileSync('./px.txt',  {encoding:'utf8'});
 const token = sign(
   { data: 'your_payload_data' },  // 你的 payload
